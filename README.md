@@ -22,6 +22,8 @@ go run main.go -c config_demo.yaml
 inputs:
     # 项目名称，没啥用
   - name: project-000
+    # paths扫描频率(秒)
+    scan_frequency: 10
     # 监控的文件，支持glob
     paths:
       - /data/log/*.log

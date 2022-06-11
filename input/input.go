@@ -101,13 +101,16 @@ func (i *Input) scan()  {
 }
 
 func (i *Input) Run(publisher *publisher.Publisher) {
+	if i.inputs.ScanFrequency < 1 {
+		i.inputs.ScanFrequency = 10
+	}
 	i.publisher = publisher
 	i.scan()
 	for {
 		select {
 		case <-i.done:
 			return
-		case <-time.After(time.Second * 10):
+		case <-time.After(time.Second * time.Duration(i.inputs.ScanFrequency)):
 			i.scan()
 		}
 	}
