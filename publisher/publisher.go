@@ -93,13 +93,10 @@ func (p *Publisher) formatObject(object interface{}, body []byte) interface{}  {
 }
 
 func (p *Publisher) curl(body []byte) {
-
-	reg := regexp.MustCompile(`%{content}`)
-
 	if p.http.Format == "json" {
 		body = p.format([]byte(p.http.Body), body)
 	} else {
-		body = reg.ReplaceAll([]byte(p.http.Body), body)
+		body = p.regexp.ReplaceAll([]byte(p.http.Body), body)
 	}
 
 	content := string(body)
