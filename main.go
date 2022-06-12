@@ -15,8 +15,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	app := app.NewAlert(*configFile)
-	if err := app.Run(); err != nil {
+	alert := app.NewAlert(*configFile)
+	if err := alert.Run(); err != nil {
 		os.Exit(1)
 	}
 }
