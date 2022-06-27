@@ -30,6 +30,10 @@ inputs:
       - /data/log1/log1.log
     # 监控内容，包含内容即报警
     include_lines: ['error', 'warning']
+    # 排除监控内容，包含不告警
+    exclude_lines:
+      - "success"
+      - "warning"
     # 另一个项目配置
   - name: project-001
     paths:

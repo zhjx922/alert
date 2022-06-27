@@ -32,10 +32,27 @@ func (i *Input) read(reader Reader)  {
 			return
 		}
 
+		alert := false
+
+AlertFor:
 		for _, word := range i.inputs.IncludeLines {
 			if bytes.Contains(b, []byte(word)) {
-				i.publisher.Write(b)
+				alert = true
+
+				if len(i.inputs.ExcludeLines) > 0 {
+					for _, exWord := range i.inputs.ExcludeLines {
+						// 如果需要排除，不告警
+						if bytes.Contains(b, []byte(exWord)) {
+							alert = false
+							break AlertFor
+						}
+					}
+				}
 			}
+		}
+
+		if alert {
+			i.publisher.Write(b)
 		}
 
 	}

@@ -9,6 +9,7 @@ type Inputs struct {
 	ScanFrequency int64 `yaml:"scan_frequency"`
 	Paths []string `yaml:"paths"`
 	IncludeLines []string `yaml:"include_lines"`
+	ExcludeLines []string `yaml:"exclude_lines"`
 }
 
 type Config struct {
